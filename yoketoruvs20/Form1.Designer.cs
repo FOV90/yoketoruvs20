@@ -71,9 +71,9 @@
             this.copyrightLabel.Font = new System.Drawing.Font("MS UI Gothic", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.copyrightLabel.Location = new System.Drawing.Point(270, 410);
             this.copyrightLabel.Name = "copyrightLabel";
-            this.copyrightLabel.Size = new System.Drawing.Size(260, 22);
+            this.copyrightLabel.Size = new System.Drawing.Size(304, 22);
             this.copyrightLabel.TabIndex = 2;
-            this.copyrightLabel.Text = "Copyright © 2020 田中　雄";
+            this.copyrightLabel.Text = "Copyright © 2020 佐々木　翔太";
             // 
             // timeLabel
             // 
@@ -128,6 +128,7 @@
             this.titleButton.TabIndex = 7;
             this.titleButton.Text = "タイトルへ";
             this.titleButton.UseVisualStyleBackColor = false;
+            this.titleButton.Click += new System.EventHandler(this.titleButton_Click);
             // 
             // clearLabel
             // 
@@ -162,6 +163,7 @@
             this.Controls.Add(this.titleLabel);
             this.Name = "Form1";
             this.Text = "よけとる2020";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
