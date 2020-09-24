@@ -28,6 +28,8 @@ namespace yoketoruvs20
         const string EnemyText = "🔹";
         const string ItemText = "★";
 
+        
+
         static Random rand = new Random();
 
         enum State
@@ -68,6 +70,7 @@ namespace yoketoruvs20
                 {
                     chrs[i].Text = ItemText;
                 }
+                chrs[i].Font = tempLabel.Font;
                 Controls.Add(chrs[i]);
             }
         }
@@ -100,10 +103,33 @@ namespace yoketoruvs20
         void UpdateGame()
         {
             Point mp = PointToClient(MousePosition);
-            mp = PointToClient(mp);
-            
-            
+            chrs[PlayerIndex].Left = mp.X - chrs[PlayerIndex].Width/2;
+            chrs[PlayerIndex].Top = mp.Y - chrs[PlayerIndex].Height/2;
+
+            for(int i=EnemyIndex;i<ChrMax;i++)
+            {
+                chrs[i].Left += vx[i];
+                chrs[i].Top += vy[i];
+
+                if(chrs[i].Left<0)
+                {
+                    vx[i] = Math.Abs(vx[i]);
+                }
+                if (chrs[i].Top < 0)
+                {
+                    vy[i] = Math.Abs(vy[i]);
+                }
+                if(chrs[i].Right>ClientSize.Width)
+                {
+                    vx[i] = -Math.Abs(vx[i]);
+                }
+                if(chrs[i].Bottom> ClientSize.Height)
+                {
+                    vy[i] = -Math.Abs(vy[i]);
+                }
+            }
         }
+
 
         void initProc()
         {
@@ -132,6 +158,8 @@ namespace yoketoruvs20
                     {
                         chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
                         chrs[i].Top = rand.Next(ClientSize.Height - chrs[i].Height);
+                        vx[i] = rand.Next(-SpeedMax, SpeedMax + 1);
+                        vy[i] = rand.Next(-SpeedMax, SpeedMax + 1);
                     }
 
                     break;
