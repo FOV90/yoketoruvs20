@@ -98,6 +98,7 @@ namespace yoketoruvs20
             {
                 UpdateGame();
             }
+           
 
         }
         void UpdateGame()
@@ -106,6 +107,7 @@ namespace yoketoruvs20
             chrs[PlayerIndex].Left = mp.X - chrs[PlayerIndex].Width/2;
             chrs[PlayerIndex].Top = mp.Y - chrs[PlayerIndex].Height/2;
 
+            
             for(int i=EnemyIndex;i<ChrMax;i++)
             {
                 chrs[i].Left += vx[i];
@@ -127,6 +129,15 @@ namespace yoketoruvs20
                 {
                     vy[i] = -Math.Abs(vy[i]);
                 }
+                if ((mp.X >= chrs[i].Left)
+               && (mp.X < chrs[i].Right)
+               && (mp.Y >= chrs[i].Top)
+               && (mp.Y < chrs[i].Bottom)
+               )
+                {
+                   MessageBox.Show("濃厚接触");
+                }
+
             }
         }
 
@@ -146,6 +157,7 @@ namespace yoketoruvs20
                     gameOverLabel.Visible = false;
                     titleButton.Visible = false;
                     clearLabel.Visible = false;
+                    chrs[PlayerIndex].Visible = false;
                     break;
 
                 case State.Game:
@@ -153,8 +165,9 @@ namespace yoketoruvs20
                     startButton.Visible = false;
                     copyrightLabel.Visible = false;
                     hiLabel.Visible = false;
+                    chrs[PlayerIndex].Visible = true;
 
-                    for(int i=EnemyIndex;i<ChrMax;i++)
+                    for (int i=EnemyIndex;i<ChrMax;i++)
                     {
                         chrs[i].Left = rand.Next(ClientSize.Width - chrs[i].Width);
                         chrs[i].Top = rand.Next(ClientSize.Height - chrs[i].Height);
